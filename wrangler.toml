@@ -1,0 +1,13 @@
+name = "vue-project"
+type = "javascript"
+
+[build]
+  command = "npm run build"
+
+[env.production]
+  account_id = "your-account-id"
+  workers_dev = true
+  route = "your-route"
+  zone_id = "your-zone-id"
+
+main = "dist/index.js"
