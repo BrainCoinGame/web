@@ -1,13 +1,15 @@
-name = "vue-project"
+name = "game-project"
 type = "javascript"
 
+account_id = "your_account_id"
+workers_dev = true
+compatibility_flags = []
+
 [build]
-  command = "npm run build"
+command = "npm run build"  # если есть сборка
 
 [env.production]
-  account_id = "your-account-id"
-  workers_dev = true
-  route = "your-route"
-  zone_id = "your-zone-id"
+route = "game.shugarfreestudio.workers.dev/*"  # ваш поддомен
+zone_id = "your_zone_id"  # можно оставить, если нужно
 
-main = "dist/index.js"
+main = "src/index.js"  # укажите точку входа для вашего проекта (например, "src/index.js")
