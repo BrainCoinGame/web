@@ -1,4 +1,4 @@
-name = "game-project"
+name = "web"
 type = "javascript"
 
 account_id = "your_account_id"
@@ -9,7 +9,7 @@ compatibility_flags = []
 command = "npm run build"  # если есть сборка
 
 [env.production]
-route = "game.shugarfreestudio.workers.dev/*"  # ваш поддомен
+route = "web.shugarfreestudio.workers.dev/*"  # ваш поддомен
 zone_id = "your_zone_id"  # можно оставить, если нужно
 
 main = "src/index.js"  # укажите точку входа для вашего проекта (например, "src/index.js")
