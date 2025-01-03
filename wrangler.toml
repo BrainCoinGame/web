@@ -1,15 +1,14 @@
 name = "web"
-type = "javascript"
-
-account_id = "your_account_id"
-workers_dev = true
-compatibility_flags = []
+compatibility_date = "2025-01-03"
 
 [build]
-command = "npm run build"  # если есть сборка
+command = "npm run build"  # если у вас есть этап сборки
 
-[env.production]
-route = "https://web.shugarfreestudio.workers.dev/*"  # ваш поддомен
-zone_id = "your_zone_id"  # можно оставить, если нужно
+[site]
+bucket = "./dist"  # Указываем директорию, куда складываются собранные файлы
 
-main = "src/index.js"  # укажите точку входа для вашего проекта (например, "src/index.js")
+[[kv_namespaces]]
+binding = "ASSETS"
+id = "your-kv-namespace-id"
+
+main = "dist/index.js"  # Убедитесь, что этот путь верный
