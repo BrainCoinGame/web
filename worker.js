@@ -1,62 +1,52 @@
-const assetMap = {
-    js: 'application/javascript',
-    css: 'text/css',
-    html: 'text/html',
-    png: 'image/png',
-    jpg: 'image/jpeg',
-    ico: 'image/x-icon',
-  };
-  
-  async function handleRequest(request, env) {
+// Конфигурация бота
+const BOT_TOKEN = '7314016583:AAGuOOSOBu747EP5F4boZVlqrU1utUufu18'
+const WEBHOOK_SECRET = 'https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/abf30fed-d10f-4dc3-b34d-55eb27705794' // Добавьте секретный путь для вебхука
+
+export default {
+  async fetch(request, env, ctx) {
+    // Проверяем, что это POST запрос от Telegram
+    if (request.method !== 'POST') {
+      return new Response('Only POST requests are allowed', { status: 405 })
+    }
+
     try {
-      const url = new URL(request.url);
-      let pathname = url.pathname;
-  
-      // Serve index.html for root path
-      if (pathname === '/' || pathname === '') {
-        const response = await env.ASSETS.get('index.html'); // Получаем index.html из assets
-        if (!response) {
-          throw new Error('index.html not found');
-        }
-        return new Response(response.body, {
-          headers: { 'Content-Type': 'text/html' },
-        });
+      // Получаем данные от Telegram
+      const update = await request.json()
+      
+      // Обработка сообщений
+      if (update.message) {
+        const { message } = update
+        const chatId = message.chat.id
+        const text = message.text || ''
+
+        // Здесь ваша логика обработки команд
+        let responseText = 'Получено сообщение: ' + text
+        
+        // Отправляем ответ обратно в Telegram
+        await sendTelegramMessage(chatId, responseText)
       }
-  
-      // Remove leading slash if present
-      pathname = pathname.startsWith('/') ? pathname.slice(1) : pathname;
-  
-      // Try to fetch the file from assets (dist directory)
-      const file = await env.ASSETS.get(pathname);
-      if (!file) {
-        // If file not found, return index.html for SPA routing
-        const indexResponse = await env.ASSETS.get('index.html');
-        if (!indexResponse) {
-          throw new Error('index.html not found');
-        }
-        return new Response(indexResponse.body, {
-          headers: { 'Content-Type': 'text/html' },
-        });
-      }
-  
-      // Get file extension
-      const extension = pathname.split('.').pop().toLowerCase();
-      const contentType = assetMap[extension] || 'text/plain';
-  
-      // Return the requested file
-      return new Response(file.body, {
-        headers: { 'Content-Type': contentType },
-      });
+
+      return new Response('OK', { status: 200 })
     } catch (error) {
-      // Return a proper error response
-      return new Response(`Server Error: ${error.message}`, {
-        status: 500,
-        headers: { 'Content-Type': 'text/plain' },
-      });
+      return new Response(`Error: ${error.message}`, { status: 500 })
     }
   }
-  
-  addEventListener('fetch', (event) => {
-    event.respondWith(handleRequest(event.request, event.target));
-  });
-  
+}
+
+// Функция для отправки сообщений в Telegram
+async function sendTelegramMessage(chatId, text) {
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`
+  const data = {
+    chat_id: chatId,
+    text: text,
+    parse_mode: 'HTML'
+  }
+
+  await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+}

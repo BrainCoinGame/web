@@ -1,51 +1,29 @@
-<<<<<<< HEAD
-import { Telegraf, Markup } from 'telegraf'
+const express = require('express');
+const bodyParser = require('body-parser');
+const request = require('request');
+const app = express();
+app.use(bodyParser.json());
 
-const token = '8192560984:AAH3eXTADJAGyeBZCpUE2Ek9NpBCfq0dFAs'
-const webAppUrl = 'https://console.firebase.google.com/project/braingame2000/overview'
+// Обработка команд от Telegram
+app.post('/webhook', (req, res) => {
+    const message = req.body.message;
+    const chatId = message.chat.id;
 
-const bot = new Telegraf(token)
+    // Обработка команды /start
+    if (message.text === '/start') {
+        const responseMessage = 'Привет! Ваше приложение запущено.';
 
-bot.command('start', (ctx) => {
-=======
-import { Telegraf, Markup } from 'telegraf';
+        request.post(`https://api.telegram.org/bot7906841156:AAHSpUZq3p_m5im8Cjuu9h1hDkSNTxEHP5A/sendMessage`, {
+            json: {
+                chat_id: chatId,
+                text: responseMessage
+            }
+        });
+    }
 
-// Используем токен из переменных окружения
-const token = process.env.BOT_TOKEN || '8192560984:AAH3eXTADJAGyeBZCpUE2Ek9NpBCfq0dFAs';
-const webAppUrl = 'https://console.firebase.google.com/project/braingame2000/overview';
-
-if (!token) {
-  throw new Error('Токен бота не указан. Укажите его в process.env.BOT_TOKEN или прямо в коде.');
-}
-
-const bot = new Telegraf(token);
-
-bot.command('start', (ctx) => {
-  const ref = ctx.message?.text?.split(' ')[1] || 'default'; // Извлекаем реферальный параметр
->>>>>>> 830b5f44b63c1cc812956e383cb3fcad3b0ebe1f
-  ctx.reply(
-    'Привет! Нажми, чтоб запустить',
-    Markup.inlineKeyboard([
-      Markup.button.webApp(
-        'Открыть мини-приложение',
-<<<<<<< HEAD
-        `${webAppUrl}?ref=${ctx.payload}` // Здесь в параметре ref передаем реферала в мини-приложение
-      ),
-    ])
-  )
-})
-
-bot.launch()
-=======
-        `${webAppUrl}?ref=${ref}` // Передаем реферал в мини-приложение
-      ),
-    ])
-  );
+    res.sendStatus(200);
 });
 
-bot.launch().then(() => {
-  console.log('Бот успешно запущен!');
-}).catch((error) => {
-  console.error('Ошибка при запуске бота:', error);
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
 });
->>>>>>> 830b5f44b63c1cc812956e383cb3fcad3b0ebe1f
