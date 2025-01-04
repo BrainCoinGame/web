@@ -6,9 +6,17 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+<<<<<<< HEAD
     "preview": "vite preview"
   },
   "dependencies": {
+=======
+    "preview": "vite preview",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.3.4",
+>>>>>>> 830b5f44b63c1cc812956e383cb3fcad3b0ebe1f
     "pinia": "^2.1.7",
     "telegraf": "^4.16.3",
     "vue": "^3.4.29",
@@ -16,6 +24,11 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
+<<<<<<< HEAD
     "vite": "^5.4.11"
+=======
+    "vite": "^5.4.11",
+    "wrangler": "^2.0.0"
+>>>>>>> 830b5f44b63c1cc812956e383cb3fcad3b0ebe1f
   }
 }

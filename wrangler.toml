@@ -1,0 +1,14 @@
+name = "web"
+compatibility_date = "2025-01-03"
+
+[build]
+command = "npm run build"  # если у вас есть этап сборки
+
+[site]
+bucket = "./dist"  # Указываем директорию, куда складываются собранные файлы
+
+[[kv_namespaces]]
+binding = "ASSETS"
+id = "your-kv-namespace-id"
+
+main = "dist/index.js"  # Убедитесь, что этот путь верный
