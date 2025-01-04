@@ -11,6 +11,8 @@ app.post('/webhook', (req, res) => {
     const message = req.body.message;
     const chatId = message.chat.id;
 
+    console.log(`Received message: ${message.text}`);
+
     if (message.text === '/start') {
         const responseMessage = 'Привет! Нажми, чтоб запустить мини-приложение.';
 
@@ -24,6 +26,12 @@ app.post('/webhook', (req, res) => {
                         url: webAppUrl
                     }]]
                 }
+            }
+        }, (error, response, body) => {
+            if (error) {
+                console.error('Error sending message:', error);
+            } else {
+                console.log('Message sent:', body);
             }
         });
     }
