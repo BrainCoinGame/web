@@ -69,7 +69,7 @@
   position: relative;
   padding-top: 83.125%; /* Увеличиваем высоту на 30% */
   margin-bottom: 25px; /* Поднимаем блок выше, уменьшив отступ */
-  margin-top: -200px; /* Добавляем отрицательный верхний отступ */
+  margin-top: -100px; /* Добавляем отрицательный верхний отступ */
 }
 .youtube-video {
   position: absolute;
@@ -172,7 +172,7 @@
   width: 100%;
   max-width: 400px;
   position: relative;
-  top: 60px;
+  top: 10px;
 }
 
 .energy-level {
