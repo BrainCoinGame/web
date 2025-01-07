@@ -172,7 +172,7 @@
   width: 100%;
   max-width: 400px;
   position: relative;
-  top: 10px;
+  top: 60px;
 }
 
 .energy-level {
