@@ -25,7 +25,7 @@
         @click="navigate"
         aria-hidden="true"
       ></i>
-    <RouterLink to="https://ccc4c025.game-project-k9b.pages.dev/" custom v-slot="{ isActive, navigate }">
+    <RouterLink to="https://ccc4c025.game-project-k9b.pages.dev" custom v-slot="{ isActive, navigate }">
 
 <RouterLink to="/friends" custom v-slot="{ isActive, navigate }">
       <i
