@@ -9,7 +9,7 @@
       ></i>
     </RouterLink>
 
-    <RouterLink to="https://game-project-k9b.pages.dev" custom v-slot="{ isActive, navigate }">
+    <RouterLink>
       <i
         class="menu-button fa fa-sack-dollar"
         :class="{ active: isActive }"
