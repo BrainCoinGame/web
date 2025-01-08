@@ -16,7 +16,7 @@
         @click="navigate"
         aria-hidden="true"
       ></i>
-    </RouterLink>
+    <RouterLink to="src/App.vue" custom v-slot="{ isActive, navigate }">
 
     <RouterLink to="/friends" custom v-slot="{ isActive, navigate }">
       <i
