@@ -9,7 +9,7 @@
       ></i>
     </RouterLink>
 
-    <RouterLink to="C:\Users\Administrator\Desktop\bg\game-project\src\app.vue" custom v-slot="{ isActive, navigate }">
+    <RouterLink to="https://game-project-k9b.pages.dev" custom v-slot="{ isActive, navigate }">
       <i
         class="menu-button fa fa-sack-dollar"
         :class="{ active: isActive }"
